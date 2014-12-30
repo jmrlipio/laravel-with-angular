@@ -11,20 +11,28 @@ class ProductsController extends \BaseController {
 	public function index()
 	{
 		$products = Product::get();
-		
-/*
-		echo '<pre>';
-		print_r($products);
-		echo '</pre>';*/
-		
+				
 		return View::make('products.index')
 			->with('products', $products);
 	}
 
-	public function search(){
+	public function getSearch(){
+		
+		$keyword = Input::get('keyword');
+		$product = Product::where('name', 'LIKE', '%'.$keyword.'%')->get();
+		$search_message = 'Sorry, Product not found';
 
-		$productSearch = new Product();
-		$results = $productSearch->search(input::all());
+		if(count($product) !=0){
+
+			return View::make('products.index')
+				->with('product', $product)
+				->with('search_message', $search_message);
+		}
+
+		return View::make('products.products')
+			->with('product', $product)
+			->with('search_message', $search_message);
+
 	}
 
 	/**
