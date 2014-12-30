@@ -1,0 +1,1 @@
+/opt/lampp/htdocs/projects/larangular/app/views/products/show.blade.php

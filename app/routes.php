@@ -11,8 +11,13 @@
 |
 */
 
-Route::get('/', function()
+/*Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('home');
 });
-Route::resource('products', 'ProductsController');
+*/
+
+Route::get('/', 'ProductsController@index');
+Route::resource('/product', 'ProductsController');
+Route::get('/search', 'ProductsController@search');
+Route::get('/api/product/search', 'ProductsAPIController@search');
